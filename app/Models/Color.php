@@ -12,4 +12,5 @@ class Color extends Model
     protected $fillable = [
       'name_en','name_ar','code'
     ];
+    protected $hidden = ['pivot'];
 }

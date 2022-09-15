@@ -10,13 +10,15 @@ use App\Models\Product;
 use App\Models\Size;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Alert;
 
 class OrderController extends Controller
 {
     public function index()
     {
+        $type = 'Today\'s';
         $orders = Order::whereMonth('delivery_date', \Carbon\Carbon::now()->month)->whereYear('delivery_date', \Carbon\Carbon::now()->year)->whereDay('delivery_date', \Carbon\Carbon::now()->day)->get();
-        return view('admin.orders.index', compact('orders'));
+        return view('admin.orders.index', compact('orders','type'));
     }
 
     public function updateMainInfo(Request $request)
@@ -144,37 +146,42 @@ class OrderController extends Controller
 
     public function waiting()
     {
+        $type = 'Waiting';
         $orders = Order::with('customer:id,name,email,phone', 'items')->whereStatus('Waiting')->whereMonth('created_at', '=', Carbon::now()->month)
             ->whereYear('created_at', '=', Carbon::now()->year)->get();
-        return view('admin.orders.index', compact('orders'));
+        return view('admin.orders.index', compact('orders','type'));
     }
 
     public function confirmed()
     {
+        $type = 'Confirmed';
         $orders = Order::with('customer:id,name,email,phone', 'items')->whereStatus('Confirmed')->whereMonth('created_at', '=', Carbon::now()->month)
             ->whereYear('created_at', '=', Carbon::now()->year)->get();
-        return view('admin.orders.index', compact('orders'));
+        return view('admin.orders.index', compact('orders','type'));
     }
 
     public function shipping()
     {
+        $type = 'Shipping';
         $orders = Order::with('customer:id,name,email,phone', 'items')->whereStatus('Shipping')->whereMonth('created_at', '=', Carbon::now()->month)
             ->whereYear('created_at', '=', Carbon::now()->year)->get();
-        return view('admin.orders.index', compact('orders'));
+        return view('admin.orders.index', compact('orders','type'));
     }
 
-    public function deliverer()
+    public function delivered()
     {
+        $type = 'Delivered';
         $orders = Order::with('customer:id,name,email,phone', 'items')->whereStatus('Delivered')->whereMonth('created_at', '=', Carbon::now()->month)
             ->whereYear('created_at', '=', Carbon::now()->year)->get();
-        return view('admin.orders.index', compact('orders'));
+        return view('admin.orders.index', compact('orders','type'));
     }
 
     public function cancelled()
     {
+        $type = 'Cancelled';
         $orders = Order::with('customer:id,name,email,phone', 'items')->whereStatus('Cancelled')->whereMonth('created_at', '=', Carbon::now()->month)
             ->whereYear('created_at', '=', Carbon::now()->year)->get();
-        return view('admin.orders.index', compact('orders'));
+        return view('admin.orders.index', compact('orders','type'));
     }
 
     public function destroy($id)

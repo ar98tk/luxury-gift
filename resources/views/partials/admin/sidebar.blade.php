@@ -47,6 +47,64 @@
                         <span class="menu-title">Home</span>
                     </a>
                 </div>
+                <div data-kt-menu-trigger="click"
+                     class="menu-item here @if(Route::is('orders.index') || Route::is('waiting-orders') || Route::is('confirmed-orders') || Route::is('shipping-orders') || Route::is('delivered-orders') || Route::is('cancelled-orders')) show @endif menu-accordion">
+									<span class="menu-link">
+										<span class="menu-icon">
+											<i class="fa fa-city fs-3"></i>
+										</span>
+										<span class="menu-title">Orders</span>
+										<span class="menu-arrow"></span>
+									</span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <div class="menu-item">
+                            <a class="menu-link @if(Route::is('orders.index')) active @endif"
+                               href="{{route('orders.index')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+                                <span class="menu-title">Today's Orders</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link @if(Route::is('waiting-orders')) active @endif"
+                               href="{{route('waiting-orders')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+                                <span class="menu-title">Waiting Orders</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link @if(Route::is('confirmed-orders')) active @endif"
+                               href="{{route('confirmed-orders')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+                                <span class="menu-title">Confirmed Orders</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link @if(Route::is('shipping-orders')) active @endif"
+                               href="{{route('shipping-orders')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+                                <span class="menu-title">Shipping Orders</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link @if(Route::is('cancelled-orders')) active @endif"
+                               href="{{route('cancelled-orders')}}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+                                <span class="menu-title">Cancelled Orders</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
                 <div class="menu-item">
                     <a class="menu-link @if(Route::is('admins.index')) active @endif"
                        href="{{route('admins.index')}}">
@@ -137,36 +195,7 @@
                         <span class="menu-title">Settings</span>
                     </a>
                 </div>
-                {{--<div data-kt-menu-trigger="click"
-                     class="menu-item here @if(Route::is('countries.index') || Route::is('cities.index') ) show @endif menu-accordion">
-									<span class="menu-link">
-										<span class="menu-icon">
-											<i class="fa fa-city fs-3"></i>
-										</span>
-										<span class="menu-title">{{trans('sidebar.countries_cities')}}</span>
-										<span class="menu-arrow"></span>
-									</span>
-                    <div class="menu-sub menu-sub-accordion menu-active-bg">
-                        <div class="menu-item">
-                            <a class="menu-link @if(Route::is('countries.index')) active @endif"
-                               href="{{route('countries.index')}}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-                                <span class="menu-title">{{trans('sidebar.countries')}}</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link @if(Route::is('cities.index')) active @endif"
-                               href="{{route('cities.index')}}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-                                <span class="menu-title">{{trans('sidebar.cities')}}</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>--}}
+
             </div>
             <!--end::Menu-->
         </div>

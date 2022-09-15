@@ -19,7 +19,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         Route::get('waiting-orders',[OrderController::class,'waiting'])->name('waiting-orders');
         Route::get('confirmed-orders',[OrderController::class,'confirmed'])->name('confirmed-orders');
         Route::get('shipping-orders',[OrderController::class,'shipping'])->name('shipping-orders');
-        Route::get('deliverer-orders',[OrderController::class,'deliverer'])->name('deliverer-orders');
+        Route::get('delivered-orders',[OrderController::class,'delivered'])->name('delivered-orders');
         Route::get('cancelled-orders',[OrderController::class,'cancelled'])->name('cancelled-orders');
         Route::post('review-orders',[OrderController::class,'review'])->name('review-orders');
         Route::post('submit-orders/{values} ',[OrderController::class,'submit'])->name('submit-orders');

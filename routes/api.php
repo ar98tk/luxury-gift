@@ -1,6 +1,6 @@
 <?php
+namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    //Auth
+    Route::get('get-info', [AuthController::class, 'getInfo']);
+    Route::get('logout',   [AuthController::class, 'logout']);
 });
+//Auth Routes
+Route::post('login',          [AuthController::class, 'login']);
+Route::post('register',       [AuthController::class, 'register']);
+
+//Categories
+Route::get('get-categories', [CategoryController::class, 'getCategories']);
+Route::get('get-category-products', [CategoryController::class, 'getCategoryProducts']);
+
+//Brands
+Route::get('get-brands', [BrandController::class, 'getBrands']);
+Route::get('get-brand-products', [BrandController::class, 'getBrandProducts']);
+
+Route::get('get-settings', [SettingsController::class, 'getSettings']);
