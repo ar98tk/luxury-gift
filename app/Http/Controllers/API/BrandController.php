@@ -25,7 +25,6 @@ class BrandController extends Controller
 
     public function getBrandProducts(Request $request)
     {
-
         $lang = $request->lang == null ? 'en' : $request->lang;
         if ($lang != 'en' && $lang != 'ar') {
             $lang = 'en';
@@ -37,7 +36,11 @@ class BrandController extends Controller
         $products = Product::select('name_' . $lang . ' as name', 'slug', 'code', 'price', 'new', 'points', 'quantity', 'description_' . $lang . ' as name', 'category_id', 'brand_id', 'id')
             ->whereBrandId($request->id)->with(['colors' => function($colors) use ($lang){
                 $colors->select('*','name_'.$lang.' as name');
-            } , 'sizes', 'images'])->get();
+            } , 'sizes', 'images','category' => function($category) use ($lang) {
+                $category->select('id','name_'.$lang.' as name','slug','image');
+            },'brand' => function($brand) use ($lang){
+                $brand->select('id','name_'.$lang.' as name', 'slug');
+            }])->get();
         return response()->json([
             'brand' => new BrandResource($brand),
             'products' => ProductResource::collection($products)

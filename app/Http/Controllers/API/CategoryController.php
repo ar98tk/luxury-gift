@@ -36,7 +36,11 @@ class CategoryController extends Controller
         $products = Product::select('name_' . $lang . ' as name', 'slug', 'code', 'price', 'new', 'points', 'quantity', 'description_' . $lang . ' as name', 'category_id', 'brand_id', 'id')
             ->whereCategoryId($request->id)->with(['colors' => function($colors) use ($lang){
                 $colors->select('*','name_'.$lang.' as name');
-            } , 'sizes', 'images'])->get();
+            } , 'sizes', 'images','category' => function($category) use ($lang) {
+                $category->select('id','name_'.$lang.' as name','slug','image');
+            },'brand' => function($brand) use ($lang){
+                $brand->select('id','name_'.$lang.' as name', 'slug');
+            }])->get();
         return response()->json([
             'category' => new CategoryResource($category),
             'products' => ProductResource::collection($products)

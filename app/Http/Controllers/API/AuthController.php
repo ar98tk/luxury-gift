@@ -112,11 +112,4 @@ class AuthController extends BaseController
 
     }
 
-    public function getInfo(Request $request)
-    {
-        $user = User::whereId($request->user()->id)->with('addresses')
-            ->select('name', 'email', 'phone')->first();
-        return new ProfileResource($user);
-    }
-
 }
